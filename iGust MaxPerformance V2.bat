@@ -195,7 +195,7 @@ if %opcao% equ 11 goto opcao11
 if %opcao% equ 12 goto opcao12
 if %opcao% equ 13 goto opcao13
 if %opcao% equ 14 goto opcao14
-if %opcao% equ e goto fl
+
 
 :teclaerrada
 goto :tweaks
@@ -1698,50 +1698,6 @@ reg add "HKLM\SOFTWARE\Microsoft\Input\Settings\ControllerProcessor\CursorSpeed"
 timeout /t 3 /nobreak >nul
 cls
 goto tweaks
-
-:fl
-title Creditos
-mode 88,24
-for /f %%a in ('echo prompt $E^| cmd') do set "esc=%%a"
-
-set "texto=Memphis"
-set "posX=40"
-set "posY=10"
-set /a "tamanhoTexto=7"
-cls
-
-set "corBaseR=225"
-set "corBaseG=48"
-set "corBaseB=108"
-
-set "corFinalR=0"
-set "corFinalG=149"
-set "corFinalB=247"
-
-set /a "variacaoR=(corFinalR - corBaseR) / tamanhoTexto"
-set /a "variacaoG=(corFinalG - corBaseG) / tamanhoTexto"
-set /a "variacaoB=(corFinalB - corBaseB) / tamanhoTexto"
-
-set "textoGradiente="
-for /L %%k in (0,1,%tamanhoTexto%) do (
-    set /a "corR=corBaseR + variacaoR * %%k"
-    set /a "corG=corBaseG + variacaoG * %%k"
-    set /a "corB=corBaseB + variacaoB * %%k"
-    if !corR! lss 0 set "corR=0"
-    if !corG! lss 0 set "corG=0"
-    if !corB! lss 0 set "corB=0"
-    if !corR! gtr 255 set "corR=255"
-    if !corG! gtr 255 set "corG=255"
-    if !corB! gtr 255 set "corB=255"
-    set "textoGradiente=!textoGradiente!!esc![38;2;!corR!;!corG!;!corB!m!texto:~%%k,1!"
-)
-echo !esc![!posY!;!posX!H!textoGradiente!!esc![0m
-
-timeout /t 4 /nobreak >nul
-goto tweaks
-
-
-
 
 
 
